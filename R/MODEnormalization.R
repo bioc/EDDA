@@ -7,7 +7,7 @@ setClass(Class = "Result", representation(roc = "matrix", prc = "matrix",
 
 filterGenesByCounts <- function(counts, minCountsThreshold) {
     rowSum <- apply(counts, 1, sum)
-    return(counts[rowSum > minCountsThreshold, ])
+    return(counts[rowSum>minCountsThreshold & !is.na(rowSum), ])
 }
 
 
@@ -36,6 +36,9 @@ MODEnormalization <- function(counts, conds, runID, winSize) {
     
     a <- apply(as.matrix(counts[, conds == "N"]), 1, mean)
     b <- apply(as.matrix(counts[, conds == "T"]), 1, mean)
+    
+    names(a) <- rownames(counts)
+    names(b) <- rownames(counts)
     
     ind <- (a != 0) & (b != 0)
     a <- a[ind]
