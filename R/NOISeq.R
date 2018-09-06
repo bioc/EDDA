@@ -451,8 +451,9 @@ tmm <- function(datos, long = 1000, lc = 1, k = 0, refColumn = NULL,
     # can be any real number.
     
     # if(!is.element('edgeR', installed.packages()[,1]))
-    # {source('http://bioconductor.org/biocLite.R')
-    # biocLite('edgeR')} library('edgeR');
+    # {if (!requireNamespace("BiocManager", quietly=TRUE))
+    install.packages("BiocManager")
+    # BiocManager::install('edgeR')} library('edgeR');
     
     L <- long^lc
     
